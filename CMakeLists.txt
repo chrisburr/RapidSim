@@ -25,7 +25,10 @@ EXECUTE_PROCESS(
 
 SET ( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR} )
 
-set(CMAKE_CXX_FLAGS    "${CMAKE_CXX_FLAGS} -msse -msse2 -msse3 -m3dnow -fPIC -fmerge-all-constants -D__ROOFIT_NOBANNER -Wall -Wextra -Werror -Wsign-compare -Wmissing-noreturn -Wno-non-virtual-dtor")
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|i[3-6]86).*")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse -msse2 -msse3 -m3dnow")
+endif()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fmerge-all-constants -D__ROOFIT_NOBANNER -Wall -Wextra -Werror -Wsign-compare -Wmissing-noreturn -Wno-non-virtual-dtor")
 
 set(CMAKE_CXX_FLAGS_DEBUG          "-g3 -Wall") 
 set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG") 
